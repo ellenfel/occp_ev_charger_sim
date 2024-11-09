@@ -1,3 +1,5 @@
+#pip install websockets ocpp
+
 # server.py
 import asyncio
 import websockets
