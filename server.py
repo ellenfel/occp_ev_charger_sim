@@ -1,5 +1,3 @@
-#pip install websockets ocpp
-
 # server.py
 import asyncio
 import websockets
@@ -15,6 +13,11 @@ class ChargePoint(cp):
             interval=10,
             status='Accepted'
         )
+
+    @on('StatusNotification')
+    async def on_status_notification(self, connector_id, error_code, status, **kwargs):
+        print(f"StatusNotification received: connector_id={connector_id}, status={status}")
+        return call_result.StatusNotificationPayload()
 
 async def on_connect(websocket, path):
     charge_point_id = path.strip('/')
